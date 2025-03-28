@@ -26,6 +26,14 @@ export type ResolverResult =
       value: false;
     }
   | {
+      valueType: 'UndefinedKeyword';
+      value: undefined;
+    }
+  | {
+      valueType: 'VoidExpression';
+      value: undefined;
+    }
+  | {
       valueType: 'ArrayLiteralExpression';
       value: unknown[];
     }
@@ -89,6 +97,11 @@ export function resolveToLiteral(
       return {
         valueType: 'FalseKeyword',
         value: false,
+      };
+    case ts.SyntaxKind.VoidExpression:
+      return {
+        valueType: 'VoidExpression',
+        value: undefined,
       };
     case ts.SyntaxKind.PrefixUnaryExpression:
       return resolvePrefixUnaryExpressionToLiteral(
@@ -197,6 +210,9 @@ function resolveSymbolToLiteral(
         return resolveToLiteral(symbol.valueDeclaration, program);
       }
     }
+    case ts.SymbolFlags.Transient: {
+      // const links = (symbol as ts.TransientIdentifier['resolvedSymbol']).li
+    }
   }
   const type = typeChecker.getTypeOfSymbol(symbol);
   return resolveTypeToLiteral(type, program);
@@ -216,6 +232,11 @@ function resolveTypeToLiteral(
       return {
         valueType: 'NumericLiteral',
         value: (typeObject as ts.NumberLiteralType).value,
+      };
+    case ts.TypeFlags.Undefined:
+      return {
+        valueType: 'UndefinedKeyword',
+        value: undefined,
       };
     case ts.TypeFlags.Object: {
       return resolveObjectTypeToLiteral(typeObject as ts.ObjectType, program);

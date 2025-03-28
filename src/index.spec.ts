@@ -268,6 +268,28 @@ describe('Expression Resolver', () => {
         expect(result.value).toBe(false);
       });
     });
+
+    describe('Undefined', () => {
+      it('should resolve undefined values', () => {
+        const { statements, program } = parseCode('undefined');
+
+        const expression = getFirstExpression(statements);
+        const result = resolveToLiteral(expression, program);
+
+        expect(result.valueType).toBe('UndefinedKeyword');
+        expect(result.value).toBe(undefined);
+      });
+
+      it('should resolve void expressions to undefined', () => {
+        const { statements, program } = parseCode('void 0');
+
+        const expression = getFirstExpression(statements);
+        const result = resolveToLiteral(expression, program);
+
+        expect(result.valueType).toBe('VoidExpression');
+        expect(result.value).toBe(undefined);
+      });
+    });
   });
 
   describe('Complex Types', () => {
