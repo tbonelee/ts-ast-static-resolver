@@ -2,8 +2,8 @@
   "name": "ts-ast-static-resolver",
   "version": "1.0.0",
   "description": "A TypeScript utility to convert AST nodes to their literal values. Note: This utility only resolves static values and does not reflect runtime changes.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "README.md"
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/tbonelee/ts-ast-static-resolver"
   },
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsup",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -41,6 +41,7 @@
     "rimraf": "^6.0.1",
     "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
+    "tsup": "^8.4.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.27.0"
   }
