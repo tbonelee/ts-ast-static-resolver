@@ -1,6 +1,6 @@
 {
   "name": "ts-ast-static-resolver",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A TypeScript utility to convert AST nodes to their literal values. Note: This utility only resolves static values and does not reflect runtime changes.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
