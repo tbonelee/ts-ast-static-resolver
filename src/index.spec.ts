@@ -290,6 +290,18 @@ describe('Expression Resolver', () => {
         expect(result.value).toBe(undefined);
       });
     });
+
+    describe('Null', () => {
+      it('should resolve null values', () => {
+        const { statements, program } = parseCode('null');
+
+        const expression = getFirstExpression(statements);
+        const result = resolveToLiteral(expression, program);
+
+        expect(result.valueType).toBe('NullKeyword');
+        expect(result.value).toBe(null);
+      });
+    });
   });
 
   describe('Complex Types', () => {

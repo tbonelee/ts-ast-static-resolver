@@ -34,6 +34,10 @@ export type ResolverResult =
       value: undefined;
     }
   | {
+      valueType: 'NullKeyword';
+      value: null;
+    }
+  | {
       valueType: 'ArrayLiteralExpression';
       value: unknown[];
     }
@@ -97,6 +101,11 @@ export function resolveToLiteral(
       return {
         valueType: 'FalseKeyword',
         value: false,
+      };
+    case ts.SyntaxKind.NullKeyword:
+      return {
+        valueType: 'NullKeyword',
+        value: null,
       };
     case ts.SyntaxKind.VoidExpression:
       return {
