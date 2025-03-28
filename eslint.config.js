@@ -6,7 +6,13 @@ const tseslint = require('typescript-eslint');
 
 module.exports = tseslint.config(
   {
-    ignores: ['eslint.config.js', 'jest.config.ts', '**/fixtures/**'],
+    ignores: [
+      'eslint.config.js',
+      'jest.config.ts',
+      'tsup.config.ts',
+      '**/fixtures/**',
+      '**/dist/**',
+    ],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,

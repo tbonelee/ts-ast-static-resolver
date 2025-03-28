@@ -219,9 +219,6 @@ function resolveSymbolToLiteral(
         return resolveToLiteral(symbol.valueDeclaration, program);
       }
     }
-    case ts.SymbolFlags.Transient: {
-      // const links = (symbol as ts.TransientIdentifier['resolvedSymbol']).li
-    }
   }
   const type = typeChecker.getTypeOfSymbol(symbol);
   return resolveTypeToLiteral(type, program);
